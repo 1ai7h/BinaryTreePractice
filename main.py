@@ -13,6 +13,8 @@ class BinaryTree(object):
     def TreePrinter(self, traversal_type):
         if traversal_type == "preorder":
             return self.PreOrder(tree.root, "")
+        elif traversal_type == "inorder":
+            return self.InOrder(tree.root, "")
         else:
             print(str(traversal_type) + " Not Supported, try all lowercase or different traversal type")
             return False
@@ -24,6 +26,15 @@ class BinaryTree(object):
             traversal = self.PreOrder(start.right, traversal)
         return traversal
 
+    def InOrder(self, start, traversal):
+        if start:
+            traversal = self.InOrder(start.left, traversal)
+            traversal += (str(start.value) + "-")
+            traversal = self.InOrder(start.right, traversal)
+        return traversal
+
+
+
 
 
 tree = BinaryTree(1)
@@ -32,4 +43,6 @@ tree.root.right = Node(3)
 tree.root.left.left = Node(4)
 tree.root.right.right = Node(5)
 
+
+print(tree.TreePrinter("inorder"))
 print(tree.TreePrinter("preorder"))
